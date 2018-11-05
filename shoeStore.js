@@ -30,6 +30,7 @@ function runProgram() {
         if (res.start) {
             connection.query(
                 "SELECT * FROM shoes",
+                // "SELECT item_id, product_name, department_name, price FROM shoes",
                 function (err, data) {
                     console.log("\n")
                     console.table(data)
@@ -81,6 +82,7 @@ function quantityAndPrice(info) {
         }
     ]).then(function (res) {
         let userQuantity = res.quantity;
+        let totalPrice = price * userQuantity;
         connection.query(
             "SELECT stock_quantity FROM shoes WHERE item_id = ?",
             choice,
@@ -90,7 +92,6 @@ function quantityAndPrice(info) {
                 } else {
                     console.log("OH NO! WE UNFORTUNETLY DO NOT HAVE ENOUGH IN OUR INVENTORY! WE ONLY HAVE " + stock + " LEFT!")
                 }
-                let totalPrice = price * userQuantity;
                 console.log("\n\nTOTAL PRICE \n-----------\n$" + totalPrice + " FOR " + userQuantity + " OF the " + shoeName + "\n\nTHANK YOU FOR YOUR PURCHASE!\n");
             });
 
@@ -107,14 +108,28 @@ function quantityAndPrice(info) {
             ],
             function (err, res) {
                 if (err) throw err;
-                // console.log(res)
-                shopMore();
-            }
-        );
-    });
-}
+            });
+            connection.query(
+                "UPDATE shoes SET ? WHERE ?", 
+                [
+                    {
+                        sales: totalPrice
+                    },
+                    {
+                        item_id: choice
+                    }
+                ],
+                function(err, data){
+                    if (err) throw err; 
+                    // console.log(data)
+                    shopMore();
+                }
+            )
 
-function shopMore() {
+        });
+    }
+    
+    function shopMore() {
     inquire.prompt([
         {
             type: "confirm",
