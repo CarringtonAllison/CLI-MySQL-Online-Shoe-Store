@@ -46,7 +46,15 @@ function runProgram() {
 }
 
 function viewDepartments() {
+    // console.log("help")
+
     connection.query(
-        "SELECT * FROM departments"
+        "SELECT * FROM departments",
+        function(err,data){
+            if (err) throw err; 
+            console.log("wow"); 
+            console.table(data)
+        }
     )
+
 }

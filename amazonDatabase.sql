@@ -34,3 +34,9 @@ ADD COLUMN sales INT(20) NOT NULL
 ALTER TABLE departments
 ADD COLUMN product_sales INT(30) NOT NULL 
 ADD COLUMN total_profit INT(30) NOT NULL 
+
+
+SELECT
+ CONCAT_WS(', ', lastName, firstname) AS `Full name`
+FROM
+ employees;

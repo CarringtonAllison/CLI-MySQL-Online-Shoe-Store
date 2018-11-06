@@ -56,6 +56,7 @@ function viewShoes() {
         function (err, data) {
             if (err) throw err;
             console.log("\n")
+            console.log(data);
             console.table(data);
             runProgram();
         }
