@@ -2,7 +2,7 @@
   "name": "mysql",
   "version": "1.0.0",
   "description": "",
-  "main": "amazon.js",
+  "main": "shoeStore.js",
   "dependencies": {
     "console.table": "^0.10.0",
     "inquirer": "^6.2.0",

@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const inquire = require("inquirer");
 const cTable = require("console.table");
+const start = require("./startProgram")
 
 //database info
 var connection = mysql.createConnection({
@@ -31,21 +32,17 @@ function runProgram() {
         let choice = data.menu;
         switch (choice) {
             case "View Shoes for Sale":
-                viewShoes();
-                break;
+                return viewShoes();
             case "View Low Inventory":
-                lowInventory();
-                break;
+                return lowInventory();
             case "Add to Inventory":
-                addInventory();
-                break;
+                return addInventory();
             case "Add New Product":
-                addProduct();
-                break;
+                return addProduct();
             case "---DONE---":
-                console.log("\nTHANKS AND HAVE A GREAT DAY!")
-                connection.end();
-                break;
+                console.log("\nTHANKS AND HAVE A GREAT DAY!\n")
+                return start(); 
+                
         };
     })
 }
@@ -138,23 +135,23 @@ function addProduct(){
         {
             type: "input", 
             name: "shoe", 
-            message: "WHAT'S THE NAME OF THE SHOES YOU WANT TO ADD?\n"
+            message: "\nWHAT'S THE NAME OF THE SHOES YOU WANT TO ADD?"
         },
         {
             type: "input", 
             name: "department",
-            message: "WHAT TYPE OF SHOE IS THIS?\n"
+            message: "\nWHAT TYPE OF SHOE IS THIS?"
 
         },
         {
             type: "input",
             name: "price",
-            message: "WHAT IS THE PRICE FOR THESE SHOES?\n"
+            message: "\nWHAT IS THE PRICE FOR THESE SHOES?"
         },
         {
             type: "input",
             name: "stock",
-            message: "HOW MANY PAIRS OF THESE SHOES ARE WE ADDING\n?"
+            message: "\nHOW MANY PAIRS OF THESE SHOES ARE WE ADDING?"
         }
     ]).then(function(data){
         let product_name = data.shoe; 
@@ -173,9 +170,13 @@ function addProduct(){
             },
             function(err, res) {
                 // console.log(res)
+                console.log("\nYOU HAVE SUCCESSFULLY ADDED " + product_name + " TO OUR INVENTORY!\n")
                 runProgram();
             }
             );
             
         })
 }
+
+
+
