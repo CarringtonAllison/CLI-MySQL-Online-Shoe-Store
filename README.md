@@ -1,4 +1,5 @@
-# Command-Line-Interface for a virtual Online Shoe Store. Data hosted in local MySQL Database & NODE.JS
+# Command-Line-Interface for Virtual Online Shoe Store. 
+# Data hosted in local MySQL Database & NODE.JS
  - View the CLI in action (https://drive.google.com/file/d/16EehAPbMVfHSzLUEZhzq1Pa-NyPS8-5L/view)
 
 ### CUSTOMER VIEW
